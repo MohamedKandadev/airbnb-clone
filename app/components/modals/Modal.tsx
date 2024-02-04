@@ -50,7 +50,7 @@ const Modal: FC<ModalProps> = ({
   if(!isOpen) return null;
 
   return (
-    <div className='flex justify-center items-center bg-neutral-800/70 fixed top-0 z-50 w-full h-full'>
+    <div className='flex justify-center items-center max-mdk:items-end bg-neutral-800/70 fixed top-0 z-50 w-full h-full'>
       {/* Content */}
       <div className={`translate duration-300 bg-white sm:rounded-md max-sm:rounded-t-md w-full md:w-4/6 lg:w-3/6 xl:w-2/5 ${showModal? 'translate-y-0': 'translate-y-full'} `}>
         {/* Header */}
