@@ -12,19 +12,19 @@ import {
 
 
 import Modal from './Modal';
-import useRegisterModal from '@/app/hooks/useRegisterModal'
 import Heading from '../ui/Heading';
 import Input from '../ui/inputs/Input';
 import toast from 'react-hot-toast';
 import Button from '../ui/Button';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
 import { signIn } from 'next-auth/react';
 
 type Props = {}
 
-const RegisterModal = (props: Props) => {
-  const {isOpen, onClose} = useRegisterModal();
-  const {onOpen} = useLoginModal();
+const LoginModal = (props: Props) => {
+  const {isOpen, onClose} = useLoginModal();
+  const {onOpen} = useRegisterModal();
   const [isLoading, setIsloading] = useState(false);
   const {
     register,
@@ -34,25 +34,21 @@ const RegisterModal = (props: Props) => {
     }
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
       email: '',
       password: ''
     }
   })
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsloading(true);
-    console.log(data)
-    axios.post('/api/register', data)
-      .then(() => {
-        onClose();
-      })
-      .catch((err) => {
-        toast.error('Something went wrong!')
-        console.log(err)
-      })
-      .finally(() => {
-        setIsloading(false);
-      })
+    signIn('credentials',{...data, redirect: false})
+      .then((callback) => {
+        if(callback?.ok){
+          toast.success('login with success')
+        }
+        if(callback?.error){
+          toast.error(callback?.error)
+        }
+      })  
   }
   const toggleOpen = () => {
     onClose();
@@ -61,8 +57,7 @@ const RegisterModal = (props: Props) => {
 
   const bodyContent = (
     <div className='flex flex-col gap-4 w-full'>
-      <Heading title='Welcome to Airbnb' subTitle='Create an account!' />
-      <Input id='name' errors={errors} label='Name' register={register} placeholder='Name' required />
+      <Heading title='Welcome back' subTitle='Login to your account' />
       <Input id='email' type='email' errors={errors} label='Email' register={register} placeholder='Email' required />
       <Input id='password' type='password' errors={errors} label='password' register={register} placeholder='Password' required />
     </div>
@@ -76,8 +71,8 @@ const RegisterModal = (props: Props) => {
       </div>
       <div className="text-center mt-3">
         <div className="text-gray-500 ">
-          Already have an account?
-          <div className="text-black inline ml-1 cursor-pointer" onClick={toggleOpen}>Log in</div>
+          You don't have an account?
+          <div className="text-black inline ml-1 cursor-pointer" onClick={toggleOpen}>Register</div>
         </div>
       </div>
     </div>
@@ -87,7 +82,7 @@ const RegisterModal = (props: Props) => {
     <Modal 
       isOpen={isOpen} 
       onClose={onClose} 
-      title='Register' 
+      title='Login' 
       disabled={isLoading} 
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
@@ -97,4 +92,4 @@ const RegisterModal = (props: Props) => {
   )
 }
 
-export default RegisterModal
+export default LoginModal
