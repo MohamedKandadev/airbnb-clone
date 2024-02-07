@@ -63,7 +63,7 @@ const Modal: FC<ModalProps> = ({
           </div>
         </div>
         {/* Body */}
-        <div className="relative p-6 flex flex-auto">
+        <div className="relative p-6 flex-auto">
           {body}
         </div>
         <div className="flex flex-col gap-2 p-6">
@@ -76,16 +76,14 @@ const Modal: FC<ModalProps> = ({
               w-full
             "
           >
-            {/* {secondaryAction && secondaryActionLabel && (
+            {secondaryAction && secondaryLabel && (
               <Button 
                 disabled={disabled} 
-                label={secondaryActionLabel} 
-                onClick={handleSecondaryAction}
+                label={secondaryLabel} 
+                onClick={secondaryAction}
                 outline
               />  
             )}
-            <Button 
-            /> */}
             <Button label={actionLabel} onClick={handelSubmit} />
           </div>
           {footer}
