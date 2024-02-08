@@ -55,6 +55,7 @@ model Listing {
   roomcount Int
   bathroomCount Int
   guestCount Int
+  price Int
   locationValue String
   userId String @db.ObjectId
 
