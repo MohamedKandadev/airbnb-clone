@@ -48,6 +48,7 @@ const RentModal = (props: Props) => {
       bathroomCount: 1,
       guestCount: 1,
       location: null,
+      price: 1
     }
   })
 
@@ -87,8 +88,9 @@ const RentModal = (props: Props) => {
         reset();
         setStep(STEPS.CATEGORY);
         rentModal.onClose();
-      }).catch(() => {
+      }).catch((err) => {
         toast.error('Something went wrong!');
+        console.log(err)
       }).finally(() => {
         setIsLoading(false)
       })

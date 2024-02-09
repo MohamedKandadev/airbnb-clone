@@ -19,6 +19,7 @@ import Button from '../ui/Button';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type Props = {}
 
@@ -26,6 +27,7 @@ const LoginModal = (props: Props) => {
   const {isOpen, onClose} = useLoginModal();
   const {onOpen} = useRegisterModal();
   const [isLoading, setIsloading] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -44,6 +46,8 @@ const LoginModal = (props: Props) => {
       .then((callback) => {
         if(callback?.ok){
           toast.success('login with success')
+          router.refresh();
+          onClose();
         }
         if(callback?.error){
           toast.error(callback?.error)
