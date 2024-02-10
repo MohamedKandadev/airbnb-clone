@@ -6,18 +6,18 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 interface IUseFavorite {
-  listngId: string;
+  listingId: string;
   currentUser: User;
 }
 
-const useFavorite = ({ currentUser, listngId }: IUseFavorite) => {
+const useFavorite = ({ currentUser, listingId }: IUseFavorite) => {
   const router = useRouter();
   const { onOpen } = useLoginModal();
-  
+
   const hasFavorite = useMemo(() => {
-    const listFavorites = currentUser.favoriteIds || [];
-    return listFavorites.includes(listngId);
-  }, [listngId, currentUser])
+    const listFavorites = currentUser?.favoriteIds || [];
+    return listFavorites.includes(listingId);
+  }, [listingId, currentUser])
 
   const toggleFavorite = useCallback( async(
     e: MouseEvent<HTMLDivElement>
@@ -29,22 +29,23 @@ const useFavorite = ({ currentUser, listngId }: IUseFavorite) => {
     try{
       let request;
       if(hasFavorite){
-        request = () => axios.post(`/api/favorites/${listngId}`)
+        request = () => axios.delete(`/api/favorites/${listingId}`)
       }else{
-        request = () => axios.delete(`/api/favorites/${listngId}`)
+        request = () => axios.post(`/api/favorites/${listingId}`)
       }
       await request();
       router.refresh();
       toast.success('Success');
     }catch(err) {
       toast.error('Something went wrong');
+      console.log(err)
     }
 
   }, [
     currentUser,
     hasFavorite,
     router,
-    listngId,
+    listingId,
   ])
   
   return {hasFavorite, toggleFavorite}
