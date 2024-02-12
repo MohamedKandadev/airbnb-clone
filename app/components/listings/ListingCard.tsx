@@ -7,11 +7,12 @@ import { useRouter } from 'next/navigation';
 
 import useCountries from '@/app/hooks/useCountries';
 import HeartButton from '../../components/ui/Buttons/HeartButton';
+import Link from 'next/link';
 
 interface ListingCardProps {
   data: Listing;
   reservation?: Reservation;
-  onAction?: (id: string) => void;
+  onAction?: (id: string) => void;  
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;

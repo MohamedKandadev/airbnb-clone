@@ -10,14 +10,17 @@ export const getListingById = async ( params: IParams ) => {
     const listing = await prisma.listing.findUnique({
       where: {
         id: params.listingId
+      },
+      include: {
+        user: true
       }
     })
   
     if(!listing) return null;
   
     return listing;
-  }catch(err: any){
-    throw new Error(err);
+  }catch(error: any){
+    throw new Error(error);
   }
 
 }

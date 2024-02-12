@@ -8,7 +8,7 @@ const getCurrentUser =  async () => {
   try{
     const session = await getServerSession(authOptions)
     if(!session?.user?.email) return null;
-    const currentUser = prisma.user.findUnique({where: {
+    const currentUser = await prisma.user.findUnique({where: {
       email: session.user.email as string
     }})
     if(!currentUser) return null;

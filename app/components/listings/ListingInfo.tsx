@@ -3,6 +3,8 @@ import React, { FC } from 'react'
 
 import ListingCategory from './ListingCategory'
 import { IconType } from 'react-icons';
+import Map from '../ui/Map';
+import useCountries from '@/app/hooks/useCountries';
 
 interface ListingInfoProps {
   currentUser: User;
@@ -14,7 +16,8 @@ interface ListingInfoProps {
     icon: IconType,
     label: string,
     description: string
-  } | undefined
+  } | undefined,
+  country: string;
 }
 
 const ListingInfo: FC<ListingInfoProps> = ({
@@ -23,10 +26,15 @@ const ListingInfo: FC<ListingInfoProps> = ({
   guestCount,
   roomCount,
   category,
-  description
+  description,
+  country
 }) => {
+  const { getByValue } = useCountries();
+  const coord = getByValue(country)
+  console.log(coord?.latIng)
+  
   return (
-    <div className="mt-10 flex flex-col gap-4">
+    <div className="mt-10 flex flex-col gap-4 col-span-4">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row">
           <div className="font-bold text-xl">
@@ -58,7 +66,7 @@ const ListingInfo: FC<ListingInfoProps> = ({
         {description}
       </div>
       <hr />
-      {/* <Map /> */}
+      <Map center={coord?.latIng} />
     </div>
   )
 }
