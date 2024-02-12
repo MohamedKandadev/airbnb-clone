@@ -15,6 +15,7 @@ export const POST = async (res: NextResponse) => {
     listingId, 
     totalPrice 
   } = body;
+  console.log(totalPrice)
 
   if(!startDate || !endDate || !totalPrice || !listingId)
     return NextResponse.error();

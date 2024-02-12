@@ -17,7 +17,7 @@ export const getReservations = async (params: IParams) => {
     if(listingId) query.listingId = listingId;
     if(userId) query.userId = userId;
     
-    const reservation = await prisma.reservation.findMany({
+    const reservations = await prisma.reservation.findMany({
       where: query,
       include: {
         listing: true
@@ -26,8 +26,8 @@ export const getReservations = async (params: IParams) => {
         createdAt: 'desc'
       }
     })
-
-    return reservation
+    
+    return reservations
     
   }catch(err: any){
     throw new Error(err);

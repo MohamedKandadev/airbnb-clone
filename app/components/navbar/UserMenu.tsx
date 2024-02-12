@@ -6,6 +6,7 @@ import useRentModal from '@/app/hooks/useRentModal';
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react'
 import { BsList } from 'react-icons/bs'
 
@@ -16,6 +17,7 @@ interface userMenuProps {
 const UserMenu: React.FC<userMenuProps> = ({
   currentUser
 }) => {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
   const rentModal = useRentModal();
   const {onOpen} = useRegisterModal();
@@ -43,8 +45,13 @@ const UserMenu: React.FC<userMenuProps> = ({
           <ul className='list-none p-0 m-0'>
             {currentUser ?  (
               <>
-                <li className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'>My trips</li>
-                <li className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'>My favorites</li>
+                <li 
+                  className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'
+                  onClick={() => router.push('/trips')}
+                >My trips</li>
+                <li 
+                  className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'
+                  onClick={() => router.push('/favorites')}>My favorites</li>
                 <li className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'>My reservations</li>
                 <li className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'>My properties</li>
                 <li className='cursor-pointer font-[600] px-4 py-2 hover:bg-gray-200 duration-200'>Airbnb my home</li>

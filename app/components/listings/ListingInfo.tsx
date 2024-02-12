@@ -31,7 +31,6 @@ const ListingInfo: FC<ListingInfoProps> = ({
 }) => {
   const { getByValue } = useCountries();
   const coord = getByValue(country)
-  console.log(coord?.latIng)
   
   return (
     <div className="mt-10 flex flex-col gap-4 col-span-4">

@@ -14,6 +14,7 @@ import useLoginModal from '@/app/hooks/useLoginModal'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Range } from 'react-date-range'
+import { differenceInDays } from 'date-fns'
 
 const initialDateRange = {
   startDate: new Date(),
@@ -49,11 +50,12 @@ const ListingClient: FC<ListingClientProps> = ({
   }, [reservations])
   
   const [isLoading, setIsLoading] = useState(false)
-  const [totalPrice, setTotalPrice] = useState(listing.price)
+  const [totalPrice, setTotalPrice] = useState<number>()
   const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
   const onCreateReservation = useCallback(() => {
     if(!currentUser) return onOpen();
+    console.log('total price is', totalPrice)
 
     setIsLoading(true)
 
@@ -73,10 +75,12 @@ const ListingClient: FC<ListingClientProps> = ({
     })
     
   }, [
-    currentUser,
-    dateRange,
+    totalPrice, 
+    dateRange, 
     listing?.id,
-    router
+    router,
+    currentUser,
+    onOpen
   ])
   
   const category = useMemo(() => {
@@ -85,17 +89,18 @@ const ListingClient: FC<ListingClientProps> = ({
   
   useEffect(() => {
     if(dateRange.startDate && dateRange.endDate){
-      const dayCount = differenceInCalendarDays (
+      const dayCount = differenceInDays (
         dateRange.endDate,
         dateRange.startDate 
       )
-      console.log(dayCount, listing.price)
-
-      if(dayCount && listing.price){
-        setTotalPrice(dayCount * listing.price)
-      }else{
-        setTotalPrice(listing.price)
-      }
+      console.log(`day count = ${dayCount} & listing price = ${listing.price} & total = ${dayCount * listing.price}`);
+      setTotalPrice((dayCount + 1)*listing.price);
+      console.log('total price is', totalPrice)
+      // if (dayCount && listing.price) {
+      //   setTotalPrice(dayCount * listing.price);
+      // } else {
+      //   setTotalPrice(listing.price);
+      // }
     }
   }, [dateRange, listing.price])
   

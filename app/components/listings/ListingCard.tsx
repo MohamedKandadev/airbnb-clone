@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import useCountries from '@/app/hooks/useCountries';
 import HeartButton from '../../components/ui/Buttons/HeartButton';
 import Link from 'next/link';
+import Button from '../ui/Button';
 
 interface ListingCardProps {
   data: Listing;
@@ -71,6 +72,14 @@ const ListingCard: FC<ListingCardProps> = ({
           </div>
           {!reservation && <div className='font-light'>night</div>}
         </div>
+        {onAction && actionLabel && (
+          <Button
+            disabled={disabled}
+            small
+            label={actionLabel} 
+            onClick={handleCancel}
+          />
+        )}
       </div>
     </div>
   )
