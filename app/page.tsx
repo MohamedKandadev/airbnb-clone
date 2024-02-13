@@ -5,8 +5,14 @@ import ClientOnly from "./components/ui/ClientOnly";
 import Container from "./components/ui/Container";
 import EmptyState from "./components/ui/EmptyState";
 
-export default async  function  Home() {
-  const listings = await getListings();
+import { IParams } from "./actions/getListings"; 
+
+interface HomeProps {
+  searchParams: IParams
+}
+
+export default async  function  Home({ searchParams }: HomeProps) {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if(listings.length === 0) return <ClientOnly >

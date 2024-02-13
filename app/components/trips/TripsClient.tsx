@@ -24,7 +24,7 @@ const TripsClient: FC<TripsClientProps> = ({
   console.log(reservations)
 
   const onCancel = useCallback((id: string) => {
-    setDeletingId(deletetingId);
+    setDeletingId(id);
 
     axios.delete(`/api/reservations/${id}`)
       .then(() => {

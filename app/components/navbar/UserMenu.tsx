@@ -53,7 +53,9 @@ const UserMenu: React.FC<userMenuProps> = ({
                   className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'
                   onClick={() => router.push('/favorites')}>My favorites</li>
                 <li className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'>My reservations</li>
-                <li className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'>My properties</li>
+                <li 
+                  className='cursor-pointer font-[600] px-4 py-2 mb-2 hover:bg-gray-200 duration-200'
+                  onClick={() => router.push('/properties')}>My properties</li>
                 <li className='cursor-pointer font-[600] px-4 py-2 hover:bg-gray-200 duration-200'>Airbnb my home</li>
                 <hr />
                 <li className='cursor-pointer font-[600] px-4 py-2 hover:bg-gray-200 duration-200' onClick={()=>signOut()}>Logout</li>
