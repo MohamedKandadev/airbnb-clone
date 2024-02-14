@@ -8,10 +8,11 @@ import toast from 'react-hot-toast';
 import Heading from '../ui/Heading';
 import Container from '../ui/Container';
 import ListingCard from '../listings/ListingCard';
+import { SafeReservation, SafeUser } from '@/app/types';
 
 interface TripsClientProps {
-  currentUser: User;
-  reservations: Reservation[]
+  currentUser: SafeUser;
+  reservations: SafeReservation[]
 }
 
 const TripsClient: FC<TripsClientProps> = ({

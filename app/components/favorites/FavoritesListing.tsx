@@ -3,11 +3,11 @@ import React, { FC } from 'react'
 import Container from '../ui/Container';
 import Heading from '../ui/Heading';
 import ListingCard from '../listings/ListingCard';
-import { SafeUser } from '@/app/types';
+import { SafeListing, SafeUser } from '@/app/types';
 
 interface FavoritesListingsProps {
-  currentUser: SafeUser;
-  listings: Listing[];
+  currentUser?: SafeUser | null;
+  listings: SafeListing[];
 }
 
 const FavoritesListing: FC<FavoritesListingsProps> = ({

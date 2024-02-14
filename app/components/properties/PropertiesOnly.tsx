@@ -9,10 +9,11 @@ import Container from '../ui/Container';
 import Heading from '../ui/Heading';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import ListingCard from '../listings/ListingCard';
+import { SafeListing, SafeUser } from '@/app/types';
 
 interface ProprtiesOnlyProps {
-  listings: Listing[];
-  currentUser: User;
+  listings: SafeListing[];
+  currentUser: SafeUser;
 }
 
 const ProprtiesOnly: FC<ProprtiesOnlyProps> = ({
