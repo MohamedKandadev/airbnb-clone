@@ -12,13 +12,13 @@ import Button from '../ui/Button';
 import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
 
 interface ListingCardProps {
-  data: SafeListing;
+  data: SafeListing | any;
   reservation?: SafeReservation;
   onAction?: (id: string) => void;  
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: SafeUser | null
+  currentUser?: SafeUser | null | any
 }
 
 const ListingCard: FC<ListingCardProps> = ({
