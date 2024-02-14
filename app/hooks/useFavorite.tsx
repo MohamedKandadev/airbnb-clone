@@ -4,10 +4,11 @@ import useLoginModal from "./useLoginModal";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { SafeUser } from "../types";
 
 interface IUseFavorite {
   listingId: string;
-  currentUser: User;
+  currentUser?: SafeUser | null;
 }
 
 const useFavorite = ({ currentUser, listingId }: IUseFavorite) => {

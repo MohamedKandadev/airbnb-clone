@@ -1,10 +1,11 @@
 import useFavorite from '@/app/hooks/useFavorite';
+import { SafeUser } from '@/app/types';
 import { User } from '@prisma/client'
 import React, { FC } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 interface HearButtonProps {
-  currentUser: User;
+  currentUser?: SafeUser | null;
   listingId: string;
 }
 

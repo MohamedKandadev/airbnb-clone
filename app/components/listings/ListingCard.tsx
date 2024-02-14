@@ -9,6 +9,7 @@ import useCountries from '@/app/hooks/useCountries';
 import HeartButton from '../../components/ui/Buttons/HeartButton';
 import Link from 'next/link';
 import Button from '../ui/Button';
+import { SafeUser } from '@/app/types';
 
 interface ListingCardProps {
   data: Listing;
@@ -17,7 +18,7 @@ interface ListingCardProps {
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: User | null
+  currentUser?: SafeUser | null
 }
 
 const ListingCard: FC<ListingCardProps> = ({
