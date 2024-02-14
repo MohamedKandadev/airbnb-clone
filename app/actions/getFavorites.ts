@@ -6,7 +6,7 @@ import getCurrentUser from './getCurrentUser';
 export const getFavorites = async () => {
   try{
     const currentUser = await getCurrentUser()
-    if(!currentUser) return NextResponse.error();
+    if(!currentUser) return [];
     
     const favorites = await prisma.listing.findMany({
       where: {
@@ -16,7 +16,12 @@ export const getFavorites = async () => {
       },
     })
     
-    return favorites
+    const safeFavorites = favorites.map((favorite) => ({
+      ...favorite,
+      createdAt: favorite.createdAt?.toString(),
+    }));
+
+    return safeFavorites;
     
   }catch(err: any){
     throw new Error(err);

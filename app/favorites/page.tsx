@@ -7,12 +7,13 @@ import EmptyState from '../components/ui/EmptyState';
 import { getFavorites } from '../actions/getFavorites';
 import Heading from '../components/ui/Heading';
 import FavoritesListings from '../components/favorites/FavoritesListing';
-import { SafeUser } from '../types';
+import { SafeListing, SafeUser } from '../types';
+import { Listing } from '@prisma/client';
 
 type Props = {}
 
 const Page = async (props: Props) => {
-  const favoritesListings: any = await getFavorites()
+  const favoritesListings = await getFavorites()
   const currentUser = await getCurrentUser()
 
   if(favoritesListings.length === 0) return <ClientOnly>
