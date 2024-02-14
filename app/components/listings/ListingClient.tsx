@@ -15,6 +15,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Range } from 'react-date-range'
 import { differenceInDays } from 'date-fns'
+import { SafeUser } from '@/app/types'
 
 const initialDateRange = {
   startDate: new Date(),
@@ -24,7 +25,7 @@ const initialDateRange = {
 
 interface ListingClientProps {
   listing: Listing,
-  currentUser?: User,
+  currentUser?: SafeUser,
   reservations?: Reservation[]
 }
 
@@ -50,7 +51,7 @@ const ListingClient: FC<ListingClientProps> = ({
   }, [reservations])
   
   const [isLoading, setIsLoading] = useState(false)
-  const [totalPrice, setTotalPrice] = useState<number>()
+  const [totalPrice, setTotalPrice] = useState<number>(listing.price)
   const [dateRange, setDateRange] = useState<Range>(initialDateRange)
 
   const onCreateReservation = useCallback(() => {

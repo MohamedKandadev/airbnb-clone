@@ -7,13 +7,14 @@ import useCountries from '@/app/hooks/useCountries';
 import Heading from '@/app/components/ui/Heading';
 import Image from 'next/image';
 import HeartButton from '../ui/Buttons/HeartButton';
+import { SafeUser } from '@/app/types';
 
 interface ListingHeadProps {
   title: string;
   imagesrc: string;
   locationValue: string;
   id: string;
-  currentUser: User;
+  currentUser?: SafeUser;
 }
 
 const ListingHead: FC<ListingHeadProps> = ({

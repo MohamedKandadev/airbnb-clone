@@ -5,9 +5,10 @@ import ListingCategory from './ListingCategory'
 import { IconType } from 'react-icons';
 import Map from '../ui/Map';
 import useCountries from '@/app/hooks/useCountries';
+import { SafeUser } from '@/app/types';
 
 interface ListingInfoProps {
-  currentUser: User;
+  currentUser?: SafeUser;
   guestCount: number;
   roomCount: number;
   bathRoomCount: number;
