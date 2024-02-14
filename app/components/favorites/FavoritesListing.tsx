@@ -6,7 +6,7 @@ import ListingCard from '../listings/ListingCard';
 import { SafeListing, SafeUser } from '@/app/types';
 
 interface FavoritesListingsProps {
-  currentUser?: SafeUser | null;
+  currentUser?: SafeUser | null |  any;
   listings: SafeListing[];
 }
 
