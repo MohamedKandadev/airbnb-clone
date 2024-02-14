@@ -75,7 +75,7 @@ const LoginModal = (props: Props) => {
       </div>
       <div className="text-center mt-3">
         <div className="text-gray-500 ">
-          You don&apos;t have an account?
+          You dont have an account?
           <div className="text-black inline ml-1 cursor-pointer" onClick={toggleOpen}>Register</div>
         </div>
       </div>
