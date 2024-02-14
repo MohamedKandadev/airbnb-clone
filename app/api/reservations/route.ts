@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/app/lib/prismadb';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 
-export const POST = async (res: NextResponse) => {
+export const POST = async (res: Request) => {
   const currentUser = await getCurrentUser();
   if(!currentUser) 
     return NextResponse.error();
