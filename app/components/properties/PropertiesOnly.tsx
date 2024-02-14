@@ -13,7 +13,7 @@ import { SafeListing, SafeUser } from '@/app/types';
 
 interface ProprtiesOnlyProps {
   listings: SafeListing[];
-  currentUser: SafeUser;
+  currentUser: SafeUser | null | any;
 }
 
 const ProprtiesOnly: FC<ProprtiesOnlyProps> = ({
