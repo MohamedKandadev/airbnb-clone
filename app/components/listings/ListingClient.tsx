@@ -15,7 +15,7 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { Range } from 'react-date-range'
 import { differenceInDays } from 'date-fns'
-import { SafeUser } from '@/app/types'
+import { SafeListing, SafeUser } from '@/app/types'
 
 const initialDateRange = {
   startDate: new Date(),
@@ -24,8 +24,10 @@ const initialDateRange = {
 } 
 
 interface ListingClientProps {
-  listing: Listing,
-  currentUser?: SafeUser,
+  listing:  SafeListing & {
+    user: SafeUser;
+  } | any,
+  currentUser?: SafeUser | null | any,
   reservations?: Reservation[]
 }
 

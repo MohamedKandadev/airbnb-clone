@@ -14,7 +14,7 @@ interface ListingHeadProps {
   imagesrc: string;
   locationValue: string;
   id: string;
-  currentUser?: SafeUser;
+  currentUser?: SafeUser | null;
 }
 
 const ListingHead: FC<ListingHeadProps> = ({

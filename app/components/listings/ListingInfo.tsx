@@ -8,7 +8,7 @@ import useCountries from '@/app/hooks/useCountries';
 import { SafeUser } from '@/app/types';
 
 interface ListingInfoProps {
-  currentUser?: SafeUser;
+  currentUser?: SafeUser | null;
   guestCount: number;
   roomCount: number;
   bathRoomCount: number;
