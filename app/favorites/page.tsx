@@ -13,10 +13,10 @@ import { Listing } from '@prisma/client';
 type Props = {}
 
 const Page = async (props: Props) => {
-  const favoritesListings = await getFavorites()
-  const currentUser = await getCurrentUser()
+  const listings = await getFavorites();
+  const currentUser = await getCurrentUser();
 
-  if(favoritesListings.length === 0) return <ClientOnly>
+  if(listings.length === 0) return <ClientOnly>
     <EmptyState 
       title='No favorites found' 
       subTitle='Look like you have no favorites listing'
@@ -26,7 +26,7 @@ const Page = async (props: Props) => {
   return <ClientOnly>
     <FavoritesListings 
       currentUser={currentUser}
-      listings={favoritesListings}
+      listings={listings}
     />
   </ClientOnly>
 }
