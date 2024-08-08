@@ -10,6 +10,8 @@ import HeartButton from '../../components/ui/Buttons/HeartButton';
 import Link from 'next/link';
 import Button from '../ui/Button';
 import { SafeListing, SafeReservation, SafeUser } from '@/app/types';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 interface ListingCardProps {
   data: SafeListing | any;
@@ -18,7 +20,8 @@ interface ListingCardProps {
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: SafeUser | null | any
+  currentUser?: SafeUser | null | any;
+  tl?: any;
 }
 
 const ListingCard: FC<ListingCardProps> = ({
@@ -28,7 +31,8 @@ const ListingCard: FC<ListingCardProps> = ({
   disabled,
   actionLabel,
   actionId = '',
-  currentUser
+  currentUser,
+  tl
 }) => {
   const router = useRouter()
   const { getByValue } = useCountries();
@@ -46,9 +50,22 @@ const ListingCard: FC<ListingCardProps> = ({
     return data.price;
   }, [reservation, data.price])
   
+  
+  
+  // useGSAP(() => {
+  
+  //   tl.from(".card-listing", {
+  //     opacity: 0,
+  //     x: -20,
+  //     duration: 1,
+  //     ease: "expoScale(0.5,7,none)",
+  //     stagger: 0.08 
+  //   })
+
+  // });
   return (
     <div 
-      className="group col-span-1 cursor-pointer" 
+      className="group col-span-1 cursor-pointer card-listing" 
       onClick={() => router.push(`/listings/${data.id}`)}
     >
       <div className="flex flex-col gap-2 w-full">

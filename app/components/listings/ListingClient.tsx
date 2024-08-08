@@ -96,16 +96,14 @@ const ListingClient: FC<ListingClientProps> = ({
         dateRange.endDate,
         dateRange.startDate 
       )
-      console.log(`day count = ${dayCount} & listing price = ${listing.price} & total = ${dayCount * listing.price}`);
       setTotalPrice((dayCount + 1)*listing.price);
-      console.log('total price is', totalPrice)
       // if (dayCount && listing.price) {
       //   setTotalPrice(dayCount * listing.price);
       // } else {
       //   setTotalPrice(listing.price);
       // }
     }
-  }, [dateRange, listing.price])
+  }, [dateRange, listing.price, totalPrice])
   
   return (
     <Container>

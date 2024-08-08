@@ -10,6 +10,9 @@ import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react'
 import { BsList } from 'react-icons/bs'
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 interface userMenuProps {
   currentUser?: User | null
 }
@@ -31,12 +34,32 @@ const UserMenu: React.FC<userMenuProps> = ({
     rentModal.onOpen()
   }, [rentModal, currentUser, loginModel ])
   
+  useGSAP(() => {
+  
+    gsap.from(".nav-usermenu", {
+      delay: 0.5,
+      opacity: 0,
+      x: -20,
+      duration: .5,
+      ease: "expo.inOut",
+    })
+
+    gsap.from(".nav-airbnbhome", {
+      delay: 0.5,
+      opacity: 0,
+      x: -20,
+      duration: .5,
+      ease: "expo.inOut",
+    })
+
+  });
+
   return (
     <div className='relative flex items-center gap-3' >
-      <h3 onClick={onRent} className='text-[14px] font-[700] max-sm:hidden py-3 px-4 rounded-full hover:bg-neutral-100 duration-150 cursor-pointer' >
+      <h3 onClick={onRent} className='nav-airbnbhome text-[14px] font-[700] max-sm:hidden py-3 px-4 rounded-full hover:bg-neutral-100 duration-150 cursor-pointer' >
         Airbnb Your Home
       </h3>
-      <div onClick={toggleOpen} className="relative border-[1px] shadow-sm py-1 px-2 justify-between items-center gap-3 w-fit rounded-full flex cursor-pointer hover:shadow-md">
+      <div onClick={toggleOpen} className="nav-usermenu relative border-[1px] shadow-sm py-1 px-2 justify-between items-center gap-3 w-fit rounded-full flex cursor-pointer hover:shadow-md">
         <BsList size={20} />
         <Image src='/images/user.jpg' width={35} height={35} alt='user icon' className='rounded-full' />
       </div>

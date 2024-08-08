@@ -9,6 +9,8 @@ import { BsSnow } from 'react-icons/bs'
 import { IoDiamond } from 'react-icons/io5'
 import CategorieBox from './CategorieBox'
 import { usePathname, useSearchParams } from 'next/navigation'
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface Props {}
 export const categories = [
@@ -92,6 +94,8 @@ export const categories = [
 const Categories = (props: Props) => {
   const params = useSearchParams();
   const category = params?.get('category');
+
+  const tl = gsap.timeline({});
   
   const pathname = usePathname();
   const isMainPage = pathname === '/';
@@ -99,13 +103,27 @@ const Categories = (props: Props) => {
   if (!isMainPage) {
     return null;
   }
+  
+  
+  // useGSAP(() => {
+  
+  //   tl.from(".categories", {
+  //     delay: .5,
+  //     opacity: 0,
+  //     x: -20,
+  //     duration: 1,
+  //     ease: "expoScale(0.5,7,none)",
+  //     stagger: 0.08 
+  //   })
+
+  // }, []);
 
   return (
     <Container>
-      <div className="pt-2 flex justify-between items-center overflow-x-auto">
+      <div className="pt-2 flex justify-between items-center overflow-x-auto categories">
         {
           categories.map((item, index) => (
-            <CategorieBox icon={item.icon} label={item.label} key={index} selected={category === item.label} />
+            <CategorieBox icon={item.icon} label={item.label} key={index} selected={category === item.label} timeline={tl} />
           ))
         }
       </div>

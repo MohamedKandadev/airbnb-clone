@@ -47,6 +47,7 @@ const useFavorite = ({ currentUser, listingId }: IUseFavorite) => {
     hasFavorite,
     router,
     listingId,
+    onOpen
   ])
   
   return {hasFavorite, toggleFavorite}

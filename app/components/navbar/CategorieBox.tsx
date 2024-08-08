@@ -3,17 +3,20 @@ import React, { useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { IconType } from 'react-icons'
 import qs from 'query-string';
+import { useGSAP } from '@gsap/react';
 
 interface CategorieBoxProps {
   icon: IconType;
   label: string;
   selected?: boolean;
+  timeline: any
 }
 
 const CategorieBox: React.FC<CategorieBoxProps> = ({
   icon: Icon, 
   label,  
   selected, 
+  timeline
 }) => {
   const router = useRouter()
   const params = useSearchParams();
@@ -42,8 +45,9 @@ const CategorieBox: React.FC<CategorieBoxProps> = ({
     router.push(url)
   }, [label, router, params])
   
+
   return (
-    <div className={`flex flex-col justify-center items-center border-b-2 gap-2 p-3 hover:text-neutral-800 transition cursor-pointer 
+    <div className={`categorie flex flex-col justify-center items-center border-b-2 gap-2 p-3 hover:text-neutral-800 transition cursor-pointer 
     ${selected ? 'text-neutral-800 border-neutral-800' : 'text-neutral-500 border-transparent'}`} onClick={handleClick}>
       <Icon size={26} />
       <div className="text-sm font-medium">

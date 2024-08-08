@@ -17,11 +17,11 @@ const CounterInput: React.FC<counterProps> = ({
   const onAdd =useCallback(() => {
     if(value < 5)
       onClick(value + 1);
-  }, [value])
+  }, [value, onClick])
   const onReduce =useCallback(() => {
     if(value > 1)
       onClick(value - 1);
-  }, [value])
+  }, [value, onClick])
   
   return (
     <div className="flex flex-row justify-between items-center">

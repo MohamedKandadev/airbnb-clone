@@ -6,6 +6,8 @@ import useSearchModal from '@/app/hooks/useSearchModal'
 import { useSearchParams } from 'next/navigation'
 import useCountries from '@/app/hooks/useCountries'
 import { differenceInDays } from 'date-fns'
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 type Props = {}
 
@@ -22,7 +24,7 @@ const Search = (props: Props) => {
   const locationLabel = useMemo(() => {
     if(locationValue) return getByValue(locationValue)?.label
     return 'Anywhere'
-  }, [getByValue, locationValue])
+  }, [getByValue, locationValue, ])
   const guestCountLabel = useMemo(() => {
     if(guestCount) return `${guestCount} Guests`;
     return 'Add Guests'
@@ -34,11 +36,23 @@ const Search = (props: Props) => {
       return `${diff} days`
     }
     return 'Any week'
-  }, [getByValue, locationValue])
+  }, [getByValue, locationValue, startDate, endDate])
+  
+  useGSAP(() => {
+  
+    gsap.from(".nav-search", {
+      delay: 0.2,
+      opacity: 0,
+      x: -20,
+      duration: .5,
+      ease: "expo.inOut",
+    })
+
+  });
   
   return (
     <div 
-      className='border-[1px] shadow-sm rounded-full pl-6 pr-2 py-2 flex cursor-pointer items-center overflow-hidden '
+      className='border-[1px] shadow-sm rounded-full pl-6 pr-2 py-2 flex cursor-pointer items-center overflow-hidden nav-search'
       onClick={() => onOpen()}
     >
       <div className='pr-6 text-[13px] font-[700] border-r-[1px]'>{locationLabel}</div>

@@ -72,7 +72,7 @@ const SearchModal = () => {
     bathroomCount, 
     dateRange,
     router,
-    onNext   
+    searchModal
   ])
   
   const actionLabel = useMemo(() => {
