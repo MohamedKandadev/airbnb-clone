@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "no-console": "off", // Disables the 'no-console' rule
-    "react/react-in-jsx-scope": "off", // Disables the 'react/react-in-jsx-scope' rule for Next.js
+    "react/react-in-jsx-scope": "off" // Disables the 'react/react-in-jsx-scope' rule for Next.js
     // Add more rules as needed
   }
 }
