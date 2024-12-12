@@ -7,33 +7,33 @@ interface IParams {
   listingId: string;
 }
 
-// // export async function POST(
-// //   req: NextRequest,
-// //   context: { params: { listingId: string } }
-// // ) {
-// //   try {
-// //     const currentUser = await getCurrentUser();
-// //     if (!currentUser) return NextResponse.error();
+export async function POST(
+  req: NextRequest,
+  context: { params: { listingId: string } }
+) {
+  try {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) return NextResponse.error();
 
-// //     const { listingId } = context.params;
-// //     if (!listingId || typeof listingId !== "string")
-// //       throw new Error("Invalid ID");
+    const { listingId } = context.params;
+    if (!listingId || typeof listingId !== "string")
+      throw new Error("Invalid ID");
 
-// //     const favoriteIds = [...(currentUser.favoriteIds || [])];
-// //     favoriteIds.push(listingId);
+    const favoriteIds = [...(currentUser.favoriteIds || [])];
+    favoriteIds.push(listingId);
 
-// //     const user = await prisma.user.update({
-// //       where: {
-// //         id: currentUser.id,
-// //       },
-// //       data: {
-// //         favoriteIds,
-// //       },
-// //     });
+    const user = await prisma.user.update({
+      where: {
+        id: currentUser.id,
+      },
+      data: {
+        favoriteIds,
+      },
+    });
 
-// //     return NextResponse.json(user);
-// //   } catch (error) {}
-// // }
+    return NextResponse.json(user);
+  } catch (error) {}
+}
 
 export async function DELETE(
   req: NextRequest,
