@@ -1,14 +1,14 @@
-import NextAuth, { type NextAuthOptions } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import { PrismaAdapter } from "@auth/prisma-adapter"; 
-import bcrypt from 'bcrypt';
+import NextAuth, { type NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import bcrypt from "bcrypt";
 import Credentials from "next-auth/providers/credentials";
 
-import prisma from '@/app/lib/prismadb';
+import prisma from "@/lib/prismadb";
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: 'jwt'
+    strategy: "jwt",
   },
   // adapter: PrismaAdapter(prisma) ,
   providers: [
@@ -17,39 +17,42 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     Credentials({
-      name: 'credentials',
+      name: "credentials",
       credentials: {
-        email: {label: 'email', type: 'text'},
-        password: {label: 'password', type: 'password'},
+        email: { label: "email", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        if(!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials')
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
-          where: {email: credentials.email}
-        })
+          where: { email: credentials.email },
+        });
 
-        if(!user || !user.hashedPass) {
-          throw new Error('Invalid credentials')
+        if (!user || !user.hashedPass) {
+          throw new Error("Invalid credentials");
         }
 
-        const isCorrectPass = await bcrypt.compare(credentials?.password, user.hashedPass)
+        const isCorrectPass = await bcrypt.compare(
+          credentials?.password,
+          user.hashedPass
+        );
 
-        if(!isCorrectPass) {
-          throw new Error('Invalid credentials')
+        if (!isCorrectPass) {
+          throw new Error("Invalid credentials");
         }
         // const user = {id: '1', name: 'Mohamed kandad'};
         return user;
-      }
-    })
+      },
+    }),
   ],
   pages: {
-    signIn: '/'
+    signIn: "/",
   },
-  debug: process.env.NODE_ENV !== 'production',
-  secret: process.env.NEXTAUTH_SECRET
-}
+  debug: process.env.NODE_ENV !== "production",
+  secret: process.env.NEXTAUTH_SECRET,
+};
 
 export default NextAuth(authOptions);

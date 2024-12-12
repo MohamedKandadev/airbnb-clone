@@ -1,28 +1,22 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-import prisma from '@/app/lib/prismadb';
-import getCurrentUser from '@/app/actions/getCurrentUser';
+import prisma from "@/lib/prismadb";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 export const POST = async (res: Request) => {
   const currentUser = await getCurrentUser();
-  if(!currentUser) 
-    return NextResponse.error();
+  if (!currentUser) return NextResponse.error();
 
   const body = await res.json();
-  const { 
-    startDate, 
-    endDate, 
-    listingId, 
-    totalPrice 
-  } = body;
-  console.log(totalPrice)
+  const { startDate, endDate, listingId, totalPrice } = body;
+  console.log(totalPrice);
 
-  if(!startDate || !endDate || !totalPrice || !listingId)
+  if (!startDate || !endDate || !totalPrice || !listingId)
     return NextResponse.error();
 
   const listingAndReservation = await prisma.listing.update({
     where: {
-      id: listingId
+      id: listingId,
     },
     data: {
       reservations: {
@@ -30,11 +24,11 @@ export const POST = async (res: Request) => {
           userId: currentUser.id,
           startDate,
           endDate,
-          totlaPrice: totalPrice
-        }
-      }
-    }
-  })
+          totlaPrice: totalPrice,
+        },
+      },
+    },
+  });
 
-  return NextResponse.json(listingAndReservation)
-}
+  return NextResponse.json(listingAndReservation);
+};

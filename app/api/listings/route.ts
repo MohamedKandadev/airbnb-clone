@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/app/lib/prismadb';
-import getCurrentUser from "@/app/actions/getCurrentUser";
+import { NextResponse } from "next/server";
+import prisma from "@/lib/prismadb";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 export const POST = async (req: Request) => {
   const currentUser = await getCurrentUser();
-  if(!currentUser) return NextResponse.error();
-  
+  if (!currentUser) return NextResponse.error();
+
   const body = await req.json();
   const {
     title,
@@ -18,7 +18,7 @@ export const POST = async (req: Request) => {
     location,
     price,
   } = body;
-  console.log(body)
+  console.log(body);
 
   const listing = await prisma.listing.create({
     data: {
@@ -32,9 +32,8 @@ export const POST = async (req: Request) => {
       roomcount: roomCount,
       bathroomCount,
       guestCount,
-    }
+    },
+  });
 
-  })
-  
-  return NextResponse.json(listing)
-}
+  return NextResponse.json(listing);
+};
