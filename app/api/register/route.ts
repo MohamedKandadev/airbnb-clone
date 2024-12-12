@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: Request) {
+export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const { email, password, name } = body;
@@ -16,6 +16,14 @@ export async function POST(req: Request) {
       );
     }
 
+    const useExiste = await prisma.user.findUnique({
+      where: { email },
+    });
+    if (useExiste)
+      return NextResponse.json(
+        { error: "User already existe" },
+        { status: 404 }
+      );
     const hashedPass = await bcrypt.hash(password, 12);
     const user = await prisma.user.create({
       data: {
@@ -33,4 +41,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-}
+};
