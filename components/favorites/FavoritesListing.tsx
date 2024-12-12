@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import Container from "../ui/Container";
 import Heading from "../ui/Heading";
 import ListingCard from "../listings/ListingCard";
-import { SafeListing, SafeUser } from "@/types";
+import { SafeListing, SafeUser } from "@/app/types";
 
 interface FavoritesListingsProps {
   currentUser?: SafeUser | null | any;

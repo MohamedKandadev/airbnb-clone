@@ -6,7 +6,7 @@ import EmptyState from "../../components/ui/EmptyState";
 import { getFavorites } from "../../actions/getFavorites";
 import Heading from "../../components/ui/Heading";
 import FavoritesListings from "../../components/favorites/FavoritesListing";
-import { SafeListing, SafeUser } from "../../types";
+import { SafeListing, SafeUser } from "../types";
 import { Listing } from "@prisma/client";
 
 type Props = {};

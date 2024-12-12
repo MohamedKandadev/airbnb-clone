@@ -5,7 +5,7 @@ import ListingCategory from "./ListingCategory";
 import { IconType } from "react-icons";
 import Map from "../ui/Map";
 import useCountries from "@/hooks/useCountries";
-import { SafeUser } from "@/types";
+import { SafeUser } from "@/app/types";
 
 interface ListingInfoProps {
   currentUser?: SafeUser | null;

@@ -9,7 +9,7 @@ import useCountries from "@/hooks/useCountries";
 import HeartButton from "../ui/Buttons/HeartButton";
 import Link from "next/link";
 import Button from "../ui/Button";
-import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 

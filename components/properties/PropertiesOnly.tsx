@@ -9,7 +9,7 @@ import Container from "../ui/Container";
 import Heading from "../ui/Heading";
 import getCurrentUser from "@/actions/getCurrentUser";
 import ListingCard from "../listings/ListingCard";
-import { SafeListing, SafeUser } from "@/types";
+import { SafeListing, SafeUser } from "@/app/types";
 
 interface ProprtiesOnlyProps {
   listings: SafeListing[];

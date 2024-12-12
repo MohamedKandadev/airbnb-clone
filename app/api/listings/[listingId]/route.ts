@@ -7,10 +7,10 @@ interface IParams {
   listingId?: string;
 }
 
-export async function DELETE(
+export const DELETE = async (
   request: Request,
   { params }: { params: IParams }
-) {
+) => {
   try {
     const currentUser = await getCurrentUser();
     if (!currentUser) return NextResponse.error();
@@ -30,4 +30,4 @@ export async function DELETE(
   } catch (err: any) {
     throw new Error(err);
   }
-}
+};
