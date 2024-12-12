@@ -49,8 +49,8 @@ export async function DELETE(
       { status: 400 }
     );
   }
-  // if (!listingId || typeof listingId !== "string")
-  //   throw new Error("Invalid ID");
+  if (!listingId || typeof listingId !== "string")
+    throw new Error("Invalid ID");
   try {
     let favoriteIds = [...(currentUser.favoriteIds || [])];
     favoriteIds = favoriteIds.filter((id: string) => id !== listingId);
