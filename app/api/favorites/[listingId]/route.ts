@@ -7,10 +7,10 @@ interface IParams {
   listingId: string;
 }
 
-export async function POST(
+export const POST = async (
   req: NextRequest,
   context: { params: { listingId: string } }
-) {
+) => {
   try {
     const currentUser = await getCurrentUser();
     if (!currentUser) return NextResponse.error();
@@ -42,16 +42,16 @@ export async function POST(
       { status: 500 }
     );
   }
-}
+};
 
-export async function DELETE(
+export const DELETE = async (
   req: NextRequest,
-  { params }: { params: { listingId: string } }
-) {
+  context: { params: { listingId: string } }
+) => {
   const currentUser = await getCurrentUser();
   if (!currentUser) return NextResponse.error();
 
-  const { listingId } = params;
+  const { listingId } = context.params;
   if (!listingId) {
     return NextResponse.json(
       { error: "Listing ID is required" },
@@ -79,4 +79,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-}
+};
