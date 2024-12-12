@@ -17,7 +17,7 @@ const HeartButton: FC<HearButtonProps> = ({ currentUser, listingId }) => {
 
   return (
     <div
-      className="relative hover:opacity-70 transition cursor-pointer"
+      className="relative hover:opacity-60 transition cursor-pointer"
       onClick={toggleFavorite}
     >
       <AiOutlineHeart
