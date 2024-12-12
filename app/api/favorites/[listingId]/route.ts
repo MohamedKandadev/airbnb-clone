@@ -17,7 +17,10 @@ export async function POST(
 
     const { listingId } = context.params;
     if (!listingId || typeof listingId !== "string")
-      throw new Error("Invalid ID");
+      return NextResponse.json(
+        { error: "Listing ID is required" },
+        { status: 400 }
+      );
 
     const favoriteIds = [...(currentUser.favoriteIds || [])];
     favoriteIds.push(listingId);
@@ -32,7 +35,13 @@ export async function POST(
     });
 
     return NextResponse.json(user);
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(
@@ -49,8 +58,6 @@ export async function DELETE(
       { status: 400 }
     );
   }
-  if (!listingId || typeof listingId !== "string")
-    throw new Error("Invalid ID");
   try {
     let favoriteIds = [...(currentUser.favoriteIds || [])];
     favoriteIds = favoriteIds.filter((id: string) => id !== listingId);
